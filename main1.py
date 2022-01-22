@@ -1,6 +1,21 @@
 from pyrogram import Client, __version__
 from script import API_HASH, API_ID, LOGGER, BOT_TOKEN, SESSION
-from user import User
+
+
+class User(Client):
+    def __init__(self):
+        super().__init__(
+            SESSION,
+            api_hash=API_HASH,
+            api_id=API_ID,
+            workers=4
+        )
+        self.LOGGER = LOGGER
+
+    async def start(self):
+        await super().start()
+        bot_details = await self.get_me()
+        return (self, bot_details.id)
 
 class Bot(Client):
     USER: User = None
