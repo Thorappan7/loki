@@ -10,6 +10,24 @@ from info import Jk
 
 SESSION="BQBzgywsSTNH2U9KVbjHrGrvJoZM98iq4OfaE3dNDthLv_j_8QvDqf7uVLW1Rpno4FFci7YcgZZxwbuPflnjzuE36e3s4-CrCXnWPGzG180vFa5QxhmIUTZ25X_9E_jPUFad6Aoz2eXb5W3SLkihHbdvkAip45zmAe53Uy-RPVDd-h5nM-iv2pX1h2WcrH05fbJ9yTOn5GnAq6XQyunc5wDsOIfqtmrMpAU8QXHM2sld9ljYAHNMmH7ow2iV8EJQuVctr59Vv7iOmae2rv5qfSjPaVQ3e6yfIkGPu-ArsPHAd1DCGakhs9Jm_bRMDdm_SHW3b59PcI2Vfl2oVKdXAja-ImTMYQA"
 
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
+    datefmt='%d-%b-%y %H:%M:%S',
+    handlers=[
+        RotatingFileHandler(
+            "autofilter.txt",
+            maxBytes=50000000,
+            backupCount=10
+        ),
+        logging.StreamHandler()
+    ]
+)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+
+def LOGGER(name: str) -> logging.Logger:
+    return logging.getLogger(name)
 class Bot(Client):
 
     def __init__(self):
@@ -30,24 +48,6 @@ class Bot(Client):
         self.LOGGER(__name__).info(
             f"@{usr_bot_me.username}  started! "
         )
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
-    datefmt='%d-%b-%y %H:%M:%S',
-    handlers=[
-        RotatingFileHandler(
-            "autofilter.txt",
-            maxBytes=50000000,
-            backupCount=10
-        ),
-        logging.StreamHandler()
-    ]
-)
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-
-def LOGGER(name: str) -> logging.Logger:
-    return logging.getLogger(name)
 
 bot = Bot()
 bot.run()
