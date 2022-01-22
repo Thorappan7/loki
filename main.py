@@ -1,3 +1,8 @@
+import os
+import logging
+from logging.handlers import RotatingFileHandler
+
+
 from pyrogram import Client,filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 import asyncio
@@ -16,9 +21,34 @@ class Bot(Client):
         plugins = {"root": "bot" },
         sleep_threshold=5
         )
+        self.LOGGER = LOGGER
 
- 
+    async def start(self):
+        await super().start()
+        usr_bot_me = await self.get_me()
+        self.set_parse_mode("html")
+        self.LOGGER(__name__).info(
+            f"@{usr_bot_me.username}  started! "
+        )
 
-app = Bot()
-app.run()
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
+    datefmt='%d-%b-%y %H:%M:%S',
+    handlers=[
+        RotatingFileHandler(
+            "autofilter.txt",
+            maxBytes=50000000,
+            backupCount=10
+        ),
+        logging.StreamHandler()
+    ]
+)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+
+def LOGGER(name: str) -> logging.Logger:
+    return logging.getLogger(name)
+
+bot = Bot()
+bot.run()
 
