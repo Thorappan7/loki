@@ -3,17 +3,17 @@ import motor.motor_asyncio
 
 DB_URI=DB_URI="mongodb+srv://poojabot:poojabot@cluster0.abcos.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
-class poojabot(type):
+class Loki(type):
     __instances__ = {}
 
     def __call__(cls, *args, **kawargs):
         if cls not in cls.__instances__:
-            cls.__instances__[cls] = super(poojabot, cls).__call__(*args, **kawargs)
+            cls.__instances__[cls] = super(Loki, cls).__call__(*args, **kawargs)
 
         return cls.__instances__[cls]
 
 
-class Database(metaclass=poojabot):
+class Database(metaclass=Loki):
 
     def init(self):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(DB_URI)
