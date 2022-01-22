@@ -50,6 +50,11 @@ class Bot(Client):
             f"@{usr_bot_me.username}  started! "
         )
 
+    async def stop(self, *args):
+        await super().stop()
+        logging.info("Bot stopped. Bye.")
+
+
 bot = Bot()
 bot.run()
 
