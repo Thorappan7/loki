@@ -4,16 +4,16 @@ import time
 import asyncio
 import pyrogram
 
-from pyrogram import Client, filters
+from pyrogram import Client as bot, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import UserAlreadyParticipant, FloodWait
 
-from.database import Database
+from .database import Database
 
 db = Database () 
 result = []
 
-@Client.on_message(filters.command("connect") & filters.group)
+@bot.on_message(filters.command("connect") & filters.group)
 async def connect(bot, update):
 
     group_id = update.chat.id
@@ -128,7 +128,7 @@ async def connect(bot, update):
         return
 
 
-@Client.on_message(filters.command("disconnect") & filters.group)
+@bot.on_message(filters.command("disconnect") & filters.group)
 async def disconnect(bot, update):
     group_id = update.chat.id
     text = update.text.split(None, 1)
@@ -208,7 +208,7 @@ async def disconnect(bot, update):
         return
 
 
-@Client.on_message(filters.command("delall") & filters.group)
+@bot.on_message(filters.command("delall") & filters.group)
 async def delall(bot, update):
     group_id = update.chat.id
 
@@ -253,7 +253,7 @@ async def delall(bot, update):
         return
 
 
-@Client.on_message(filters.text & filters.group)
+@bot.on_message(filters.text & filters.group)
 async def auto_filter (bot, update):
     
     group_id = update.chat.id
@@ -341,7 +341,7 @@ async def auto_filter (bot, update):
             reply_to_message_id=update.message_id
         )
 
-@Client.on_callback_query()
+@bot.on_callback_query()
 async def cb_handler(bot, query:CallbackQuery, group=1):
     
      
