@@ -1,7 +1,7 @@
 import motor.motor_asyncio
 
 
-DB_URI=DB_URI="mongodb+srv://poojabot:poojabot@cluster0.abcos.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+DB_URI="mongodb+srv://poojabot:poojabot@cluster0.abcos.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 class Loki(type):
     __instances__ = {}
