@@ -5,9 +5,9 @@ from info import Jk
 
 bot = Client(
     "my first projrct",
-    api_id=502966,
-    api_hash="ba91c94ee88658b8702befa528544df3",
-    bot_token="5153914057:AAGnHPEtgNYctk-zgoluy1PatigpuN65WD0",
+    api_id=15801427,
+    api_hash="b313f70d21884aa514b86ba1d1057da9",
+    bot_token="5256333435:AAE6eZQLtVfLe32EOMXy9YcwDPo5GCQUTqM",
     plugins = {"root": "bot" },
     sleep_threshold=5
 )
